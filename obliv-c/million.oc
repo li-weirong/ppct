@@ -1,0 +1,13 @@
+#include<obliv.oh>
+#include"million.h"
+
+void millionaire(void* args) {
+  protocolIO *io=args;
+  obliv int aliceWealth,bobWealth;
+  aliceWealth = feedOblivInt(io->mywealth,1);	//获取隐私输入
+  bobWealth = feedOblivInt(io->mywealth,2);
+  bool eq,lt;
+  revealOblivBool(&eq, aliceWealth == bobWealth, 0);	//首先比较两人是否同样富有
+  revealOblivBool(&lt, aliceWealth < bobWealth, 0);	//然后比较是否Bob更加富有
+  io->cmp = (!eq? lt?-1:1 : 0);	//输出最后比较结果
+}

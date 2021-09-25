@@ -1,0 +1,22 @@
+enclave {
+    from "sgx_tstdc.edl" import *;
+
+    trusted {
+        /* define ECALLs here. */
+        public int crypto_init([in, string] const char* sealed_data_file);
+        public int crypto_seal_keys([in, string] const char* sealed_data_file);
+        public int crypto_sign([in, string] const char* message, 
+                [out, size=sig_len] void* signature, size_t sig_len);
+        public int crypto_verify([in, string] const char* message, 
+                [in, size=sig_len] void* signature, size_t sig_len);
+        public int crypto_close();
+    };
+
+    untrusted {
+        /* define OCALLs here. */
+        void crypto_write_data([in, string] const char* file_name, 
+                [in, size=len] const unsigned char* p_data, size_t len);
+        void crypto_read_data([in, string] const char* file_name, 
+                [out] unsigned char** pp_data, [out] size_t* len);
+    };
+};
