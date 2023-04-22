@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 project(SEALDemo LANGUAGES CXX)
-find_package(SEAL 3.6.4 EXACT REQUIRED)
+find_package(SEAL 4.0.0 EXACT REQUIRED)
 add_executable(client-setup)
 target_sources(client-setup
     PRIVATE
